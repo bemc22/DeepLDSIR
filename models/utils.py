@@ -3,21 +3,6 @@ import tensorflow as tf
 import numpy as np
 import pywt
 
-wave = 'Haar'
-w = pywt.Wavelet(wave)
-ll = np.outer(w.dec_lo, w.dec_lo)
-lh = np.outer(w.dec_hi, w.dec_lo)
-hl = np.outer(w.dec_lo, w.dec_hi)
-hh = np.outer(w.dec_hi, w.dec_hi)
-d_temp = np.zeros((np.shape(ll)[0], np.shape(ll)[1], 1, 4))
-d_temp[::-1, ::-1, 0, 0] = ll
-d_temp[::-1, ::-1, 0, 1] = lh
-d_temp[::-1, ::-1, 0, 2] = hl
-d_temp[::-1, ::-1, 0, 3] = hh
-
-filts = d_temp.astype('float32')
-filts = filts[None, :, :, :, :]
-filts = tf.convert_to_tensor(filts, name='filter')
 
 def wavelet(inputs, filters, lvl):
     outputs = tf.nn.conv3d(inputs, filters, padding='VALID',strides=[1, 1, 2, 2, 1])
@@ -39,17 +24,32 @@ def wavelet(inputs, filters, lvl):
     return outputs
 
 
-def tf_dwt(inputs,  wave=w, lvl=4, filters=filts):
-    sz = 2 * (len(wave.dec_lo) // 2 - 1)
+def tf_dwt(inputs, lvl=7):
+    wave = 'Haar'
+    w = pywt.Wavelet(wave)
+    ll = np.outer(w.dec_lo, w.dec_lo)
+    lh = np.outer(w.dec_hi, w.dec_lo)
+    hl = np.outer(w.dec_lo, w.dec_hi)
+    hh = np.outer(w.dec_hi, w.dec_hi)
+    d_temp = np.zeros((np.shape(ll)[0], np.shape(ll)[1], 1, 4))
+    d_temp[::-1, ::-1, 0, 0] = ll
+    d_temp[::-1, ::-1, 0, 1] = lh
+    d_temp[::-1, ::-1, 0, 2] = hl
+    d_temp[::-1, ::-1, 0, 3] = hh
+
+    filts = d_temp.astype('float32')
+    filts = filts[None, :, :, :, :]
+    filts = tf.convert_to_tensor(filts, name='filter')
+    
+    sz = 2 * (len(w.dec_lo) // 2 - 1)
     inputs = tf.pad(inputs, tf.constant(
         [[0, 0], [sz, sz], [sz, sz], [0, 0]]), mode="REFLECT")
     inputs = tf.expand_dims(inputs, 1)
 
     inputs = tf.split(inputs, [1]*int(inputs.shape.dims[4]), 4)
     inputs = tf.concat([x for x in inputs], 1)
-    inputs = wavelet(inputs, filters, lvl)
+    inputs = wavelet(inputs, filts, lvl)
     inputs = tf.transpose(inputs, perm=[0, 2, 3, 1, 4])[:, :, :, :, 0]
-
     return inputs
 
 def plot_img(imagen, canales, p=1):
