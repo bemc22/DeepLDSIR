@@ -1,1 +1,1 @@
-# Deep Low-Dimensional Prior Representation For Compressive Spectral Reconstruction 
+# Deep Low-Dimensional Spectral Image Representation For Compressive Spectral Image Reconstruction
