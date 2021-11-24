@@ -1,3 +1,3 @@
 # Deep Low-Dimensional Spectral Image Representation For Compressive Spectral Reconstruction
 
-[![DOI:10.1109/MLSP52302.2021.9596541](https://zenodo.org/badge/DOI/10.1007/978-3-319-76207-4_15.svg)](https://doi.org/10.1109/MLSP52302.2021.9596541)
+[![DOI:10.1109/MLSP52302.2021.9596541](https://zenodo.org/badge/DOI/10.1109/MLSP52302.2021.9596541.svg)](https://doi.org/10.1109/MLSP52302.2021.9596541)
