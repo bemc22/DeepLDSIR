@@ -1,5 +1,6 @@
 # Deep Low-Dimensional Spectral Image Representation for Compressive Spectral Reconstruction
 
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/hdspgroup/DeepLDSIR/blob/master/demo_recons.ipynb)
 [![DOI:10.1109/MLSP52302.2021.9596541](https://zenodo.org/badge/DOI/10.1109/MLSP52302.2021.9596541.svg)](https://doi.org/10.1109/MLSP52302.2021.9596541)
 
 ## Abstract
