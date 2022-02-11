@@ -140,7 +140,7 @@ class HSI_net:
         Eh = self.E(inputs)
         DEh = self.D(Eh)
         TV = Lambda(lambda x: denoiser(x), name='TV')(DEh)
-        model = Model(inputs, [DEh, TV], name='Prior Autoencoder')
+        model = Model(inputs, [DEh, TV], name='PriorAutoencoder')
         if (self.pretrained_weights):
             model.load_weights(self.pretrained_weights)
         return model
