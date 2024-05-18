@@ -28,7 +28,7 @@ def csi_mapping(x, coded_size, transmittance=0.5):
 
 class DataGen(tf.data.Dataset):
 
-    def _generator(data_path):  
+    def _generator(self, data_path):  
 
         list_imgs = get_list_imgs(data_path) 
 
