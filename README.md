@@ -16,7 +16,7 @@ Model-based deep learning techniques are the state-of-the-art in compressive spe
 
 
 ## How to cite
-If this code is useful for your and you use it in an academic work, please consider citing this paper as
+If this code is useful for your research and you use it in an academic work, please consider citing this paper as
 
 
 ```bib
